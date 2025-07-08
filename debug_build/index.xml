@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Danielle Verlaine</title>
+    <link>https://danielleverlaine.com/</link>
+    <description>Recent content on Danielle Verlaine</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2025 </copyright>
+    <lastBuildDate>Sat, 21 Jun 2025 18:54:05 +0200</lastBuildDate><atom:link href="https://danielleverlaine.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Contact</title>
+      <link>https://danielleverlaine.com/contact/</link>
+      <pubDate>Sun, 22 Jun 2025 01:00:00 +0200</pubDate>
+      
+      <guid>https://danielleverlaine.com/contact/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>https://danielleverlaine.com/aboutme/</link>
+      <pubDate>Sat, 21 Jun 2025 18:54:05 +0200</pubDate>
+      
+      <guid>https://danielleverlaine.com/aboutme/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>About Danielle</title>
+      <link>https://danielleverlaine.com/about-backup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://danielleverlaine.com/about-backup/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Books</title>
+      <link>https://danielleverlaine.com/books/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://danielleverlaine.com/books/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,37 @@
+/* Danielle custom scheme */
+:root {
+  --color-neutral: 234, 238, 227;
+  /* Light green/beige palette */
+  --color-neutral-50: 249, 250, 247;
+  --color-neutral-100: 244, 247, 239;
+  --color-neutral-200: 234, 238, 227;
+  --color-neutral-300: 220, 225, 210;
+  --color-neutral-400: 195, 201, 185;
+  --color-neutral-500: 170, 177, 160;
+  --color-neutral-600: 145, 153, 135;
+  --color-neutral-700: 120, 129, 110;
+  --color-neutral-800: 95, 105, 85;
+  --color-neutral-900: 70, 81, 60;
+  /* Warm accent colors that complement the green */
+  --color-primary-50: 252, 245, 245;
+  --color-primary-100: 248, 235, 235;
+  --color-primary-200: 241, 215, 215;
+  --color-primary-300: 234, 195, 195;
+  --color-primary-400: 220, 155, 155;
+  --color-primary-500: 206, 115, 115;
+  --color-primary-600: 185, 95, 95;
+  --color-primary-700: 164, 75, 75;
+  --color-primary-800: 143, 55, 55;
+  --color-primary-900: 122, 35, 35;
+  /* Secondary warm tones */
+  --color-secondary-50: 254, 252, 245;
+  --color-secondary-100: 253, 249, 235;
+  --color-secondary-200: 251, 243, 215;
+  --color-secondary-300: 249, 237, 195;
+  --color-secondary-400: 245, 225, 155;
+  --color-secondary-500: 241, 213, 115;
+  --color-secondary-600: 217, 191, 95;
+  --color-secondary-700: 193, 169, 75;
+  --color-secondary-800: 169, 147, 55;
+  --color-secondary-900: 145, 125, 35;
+}

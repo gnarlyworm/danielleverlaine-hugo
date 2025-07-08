@@ -1,0 +1,2 @@
+mkdir -p assets/css
+echo 'body { background-color: #EAEGE3; }' > assets/css/custom.css

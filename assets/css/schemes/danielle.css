@@ -1,0 +1,477 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Gilda+Display:wght@400&family=Marcellus:wght@400&family=Beau+Rivage:wght@400;700&display=swap');
+
+/* Danielle custom scheme - ultra light background with dark burgundy text */
+:root {
+  --color-neutral: 254, 253, 252;
+  /* Ultra light warm palette */
+  --color-neutral-50: 255, 255, 255;
+  --color-neutral-100: 254, 254, 253;
+  --color-neutral-200: 254, 253, 252;
+  --color-neutral-300: 80, 75, 70;
+  --color-neutral-400: 70, 65, 60;
+  --color-neutral-500: 60, 55, 50;
+  --color-neutral-600: 50, 45, 40;
+  --color-neutral-700: 40, 35, 30;
+  --color-neutral-800: 30, 25, 20;
+  --color-neutral-900: 80, 2, 13;
+  /* Dark burgundy text colors */
+  --color-primary-50: 248, 240, 241;
+  --color-primary-100: 241, 225, 227;
+  --color-primary-200: 227, 195, 199;
+  --color-primary-300: 76,0,0;
+  --color-primary-400: 76,0,0;
+  --color-primary-500: 143, 15, 31;
+  --color-primary-600: 115, 12, 25;
+  --color-primary-700: 87, 9, 19;
+  --color-primary-800: 76,0,0;
+  --color-primary-900: 76,0,0;
+  /* Secondary warm tones */
+  --color-secondary-50: 254, 250, 245;
+  --color-secondary-100: 253, 245, 235;
+  --color-secondary-200: 251, 235, 215;
+  --color-secondary-300: 249, 225, 195;
+  --color-secondary-400: 245, 205, 155;
+  --color-secondary-500: 241, 185, 115;
+  --color-secondary-600: 217, 161, 95;
+  --color-secondary-700: 193, 137, 75;
+  --color-secondary-800: 169, 113, 55;
+  --color-secondary-900: 145, 89, 35;
+}
+
+/* Custom Typography */
+h1, h2, h3, h4, h5, h6, .text-xl, .text-2xl, .text-3xl, .text-4xl {
+  font-family: 'Gilda Display', serif !important;
+  font-weight: 700 !important;
+  font-size: 1.2em !important;
+}
+
+p, .text-sm, .text-base, .subtitle {
+  font-family: 'Marcellus', serif !important;
+  font-weight: 400 !important;
+  font-size: 1.1em !important;
+  letter-spacing: 1px !important;
+}
+
+/* Make the main title even bigger and bolder */
+.text-4xl, .text-3xl {
+  font-size: 1.5em !important;
+  font-weight: 700 !important;
+}
+
+/* Keep footer text small */
+footer, .footer, .text-xs, small {
+  font-family: 'Marcellus', serif !important;
+  font-weight: 400 !important;
+  font-size: 0.90em !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Social Media Icons Styling */
+.author-links a,
+.social-links a {
+  color: rgb(143, 15, 31) !important;
+  transition: all 0.3s ease !important;
+  margin: 0 8px !important;
+  font-size: 1.5em !important;
+}
+
+.author-links a:hover,
+.social-links a:hover {
+  color: rgb(87, 9, 19) !important;
+  transform: scale(1.2) !important;
+}
+
+.author-links svg,
+.social-links svg {
+  fill: rgb(143, 15, 31) !important;
+  transition: all 0.3s ease !important;
+}
+
+.author-links a:hover svg,
+.social-links a:hover svg {
+  fill: rgb(87, 9, 19) !important;
+  transform: scale(1.2) !important;
+}
+
+/* Dark mode social media icons */
+.dark .author-links a,
+.dark .social-links a,
+[data-theme="dark"] .author-links a,
+[data-theme="dark"] .social-links a {
+  color: rgb(254, 253, 252) !important;
+}
+
+.dark .author-links a:hover,
+.dark .social-links a:hover,
+[data-theme="dark"] .author-links a:hover,
+[data-theme="dark"] .social-links a:hover {
+  color: rgb(143, 15, 31) !important;
+}
+
+.dark .author-links svg,
+.dark .social-links svg,
+[data-theme="dark"] .author-links svg,
+[data-theme="dark"] .social-links svg {
+  fill: rgb(254, 253, 252) !important;
+}
+
+.dark .author-links a:hover svg,
+.dark .social-links a:hover svg,
+[data-theme="dark"] .author-links a:hover svg,
+[data-theme="dark"] .social-links a:hover svg {
+  fill: rgb(143, 15, 31) !important;
+}
+
+/* Center align social media icons */
+.author-links,
+.social-links {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  margin-top: 1rem !important;
+}
+
+/* Dark theme override - more specific targeting */
+.dark main, 
+[data-theme="dark"] main,
+.dark .prose,
+[data-theme="dark"] .prose,
+.dark footer,
+[data-theme="dark"] footer {
+  background-color: rgb(76,0,0) !important;
+}
+
+/* Don't apply dark background to body or html to preserve banner */
+.dark body, 
+[data-theme="dark"] body,
+.dark html, 
+[data-theme="dark"] html {
+  background: transparent !important;
+}
+
+/* Only change text color, not backgrounds */
+.dark main *, 
+[data-theme="dark"] main *,
+.dark footer *,
+[data-theme="dark"] footer * {
+  color: rgb(255, 255, 254) !important;
+}
+
+/* Keep banner visible in dark mode */
+.dark body::before, 
+[data-theme="dark"] body::before {
+  display: block !important;
+  background-image: url('/images/banner.png') !important;
+  background-color: transparent !important;
+}
+
+/* Fix white sides in dark mode */
+.dark, 
+[data-theme="dark"] {
+  background-color: rgb(76,0,0) !important;
+}
+
+.dark body, 
+[data-theme="dark"] body {
+  background-color: rgb(76,0,0) !important;
+}
+
+/* Make sure the content container also has dark background */
+.dark .container,
+[data-theme="dark"] .container,
+.dark .max-w-7xl,
+[data-theme="dark"] .max-w-7xl,
+.dark .mx-auto,
+[data-theme="dark"] .mx-auto {
+  background-color: transparent !important;
+}
+
+/* Ensure full-width dark background */
+.dark html,
+[data-theme="dark"] html {
+  background-color: rgb(76,0,0) !important;
+}
+
+/* Fix the ridge/line between banner and content */
+body::before {
+  content: "";
+  display: block;
+  width: 100vw;
+  height: 280px; /* Adjust height as needed */
+  background-image: url('/images/banner.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Make sure header content appears on top of banner */
+header, .header {
+  position: relative;
+  z-index: 10;
+  background: transparent !important; /* Remove header background */
+}
+
+/* Move header navigation down by 48px - using margin instead of transform */
+.main-menu {
+  margin-top: 48px !important;
+  position: relative !important;
+  z-index: 50 !important;
+}
+
+/* Push main content down to clear the banner */
+main {
+  margin-top: 280px !important; /* Match banner height exactly */
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove any borders or shadows that might create the ridge */
+.dark main,
+[data-theme="dark"] main {
+  border: none !important;
+  box-shadow: none !important;
+  margin-top: 280px !important;
+}
+
+/* Target ONLY the header/navigation area, not main content */
+header .text-xl,
+nav .text-xl,
+.header .text-xl {
+  color: rgb(254, 253, 252) !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Make sure we don't affect the main content title */
+main .text-xl,
+.prose .text-xl,
+article .text-xl {
+  color: rgb(76, 0, 0) !important; /* Keep main content burgundy */
+  text-shadow: none !important;
+}
+
+/* Target header buttons and icons specifically */
+header button,
+header svg,
+nav button,
+nav svg {
+  color: rgb(254, 253, 252) !important;
+  fill: rgb(254, 253, 252) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Add red hover effect to search and toggle icons */
+header button:hover,
+header button:hover svg,
+nav button:hover,
+nav button:hover svg,
+#search-button:hover,
+#search-button:hover svg,
+button[aria-label="Search"]:hover,
+button[aria-label="Search"]:hover svg,
+.theme-toggle:hover,
+.theme-toggle:hover svg {
+  color: rgb(143, 15, 31) !important;
+  fill: rgb(143, 15, 31) !important;
+  transform: scale(1.1) !important;
+}
+
+/* Override specific Tailwind classes for navigation menu items */
+.main-menu .text-gray-500,
+.main-menu .hover\\:text-primary-600,
+.main-menu .hover\\:text-gray-900,
+.main-menu .dark\\:hover\\:text-primary-400,
+header .text-gray-500,
+header .hover\\:text-primary-600,
+header .hover\\:text-gray-900,
+header .dark\\:hover\\:text-primary-400,
+nav .text-gray-500,
+nav .hover\\:text-primary-600,
+nav .hover\\:text-gray-900,
+nav .dark\\:hover\\:text-primary-400 {
+  color: rgb(254, 253, 252) !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Target the actual links directly by their structure */
+.main-menu nav a.flex.items-center,
+header nav a.flex.items-center,
+nav a.flex.items-center {
+  color: rgb(254, 253, 252) !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Add back red hover effect */
+.main-menu nav a:hover,
+header nav a:hover,
+nav a:hover,
+.main-menu nav a:hover *,
+header nav a:hover *,
+nav a:hover * {
+  color: rgb(143, 15, 31) !important;
+  text-shadow: none !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Move the entire first nav (site title) container to the left */
+.main-menu nav:first-child {
+  position: relative !important;
+  left: -30px !important;
+}
+
+/* Keep the site title (Danielle Verlaine) with Beau Rivage - RED in light mode */
+.main-menu nav:first-child a {
+  font-family: 'Beau Rivage', serif !important;
+  font-weight: 500 !important;
+  font-size: 3.7em !important;
+  color: rgb(143, 15, 31) !important; /* Red by default in light mode */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Cream hover effect for site title in light mode */
+.main-menu nav:first-child a:hover {
+  color: rgb(254, 253, 252) !important; /* Cream on hover */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Keep white for dark mode */
+.dark .main-menu nav:first-child a,
+[data-theme="dark"] .main-menu nav:first-child a {
+  color: rgb(254, 253, 252) !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark .main-menu nav:first-child a:hover,
+[data-theme="dark"] .main-menu nav:first-child a:hover {
+  color: rgb(143, 15, 31) !important;
+  text-shadow: none !important;
+}
+
+
+/* Dark mode featured section - change burgundy to cream */
+.dark div[style*="background: linear-gradient(135deg, rgb(76,0,0), rgb(76, 0, 0))"],
+[data-theme="dark"] div[style*="background: linear-gradient(135deg, rgb(76,0,0), rgb(76, 0, 0))"] {
+  background: rgb(254, 253, 252) !important; /* Cream background */
+}
+
+/* Dark mode featured section text - change white text to burgundy */
+.dark div[style*="background: linear-gradient(135deg, rgb(76,0,0), rgb(76, 0, 0))"] h2,
+.dark div[style*="background: linear-gradient(135deg, rgb(76,0,0), rgb(76, 0, 0))"] p,
+[data-theme="dark"] div[style*="background: linear-gradient(135deg, rgb(76,0,0), rgb(76, 0, 0))"] h2,
+[data-theme="dark"] div[style*="background: linear-gradient(135deg, rgb(76,0,0), rgb(76, 0, 0))"] p {
+  color: rgb(76, 0, 0) !important; /* Burgundy text */
+}
+
+/* Add this to your danielle.css file - replace any existing icon CSS */
+
+/* feather3 SVG icon before the site title */
+.main-menu nav:first-child a::before {
+  content: "";
+  background-image: url('/images/feather3.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 95px;
+  height: 95px;
+  margin-right: -45px;
+  Margin-top: -48px;
+  display: inline-block;
+  vertical-align: middle;
+  
+  /* Add some elegant effects */
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.6));
+  
+  /* Subtle rotation for elegance */
+  transform: rotate(-10deg);
+  
+  /* Smooth transitions */
+  transition: all 0.3s ease;
+}
+
+/* Hover effects for the feather3 */
+.main-menu nav:first-child a:hover::before {
+  transform: rotate(-10deg) scale(1.1);
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8))
+          drop-shadow(0 0 8px rgba(143, 15, 31, 0.5)); /* Red glow on hover */
+}
+
+/* Dark mode adjustments for the feather3 */
+.dark .main-menu nav:first-child a::before,
+[data-theme="dark"] .main-menu nav:first-child a::before {
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.8))
+          brightness(0) invert(1); /* Makes it white in dark mode */
+}
+
+.dark .main-menu nav:first-child a:hover::before,
+[data-theme="dark"] .main-menu nav:first-child a:hover::before {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8))
+          brightness(0) invert(1)
+          drop-shadow(0 0 8px rgba(143, 15, 31, 0.7));
+}
+
+
+
+/* Add this to your danielle.css file */
+
+/* Social media icons filter for dark mode */
+.dark img[src*="instagram.svg"],
+.dark img[src*="tiktok.svg"],
+[data-theme="dark"] img[src*="instagram.svg"],
+[data-theme="dark"] img[src*="tiktok.svg"] {
+  filter: brightness(0) saturate(100%) invert(0); /* Makes them black */
+  transition: filter 0.3s ease;
+}
+
+/* Hover effect for dark mode icons */
+.dark img[src*="instagram.svg"]:hover,
+.dark img[src*="tiktok.svg"]:hover,
+[data-theme="dark"] img[src*="instagram.svg"]:hover,
+[data-theme="dark"] img[src*="tiktok.svg"]:hover {
+  filter: brightness(0) saturate(100%) invert(0.3); /* Slightly lighter on hover */
+  transform: scale(1.1);
+}
+
+/* Light mode - keep original colors with hover effect */
+img[src*="instagram.svg"]:hover,
+img[src*="tiktok.svg"]:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* Style horizontal rules (hr elements) */
+hr {
+  border: none !important;
+  height: 1.3px !important;
+  background-color: rgb(40, 40, 40) !important; /* Dark brown for light mode */
+  margin: 40px auto !important;
+  width: 100% !important; /* Adjust width as needed */
+}
+
+/* Dark mode - make it very dark grey */
+.dark hr,
+[data-theme="dark"] hr {
+  background-color: rgb(100, 100, 100) !important; /* Very dark grey */
+}
+
+#/* Alternative: If you want it thinner */
+hr {
+  border: none !important;
+  height: 1px !important;
+  background-color: rgb(76, 0, 0) !important;
+  margin: 40px auto !important;
+  width: 60% !important;
+}
+
+#/* Dark mode version */
+.dark hr,
+[data-theme="dark"] hr {
+  background-color: rgb(30, 30, 30) !important;
+}
+
+
