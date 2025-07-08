@@ -1,8 +1,9 @@
 +++
 title = "Artworks"
-date = "2025-06-22T01:00:00+02:00"
+description = "Discover my world of dark romance"
 showDate = false
-draft = false
+showReadingTime = false
+showWordCount = false
 +++
 
 
