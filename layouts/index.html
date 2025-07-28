@@ -1,0 +1,104 @@
+{{ define "main" }}
+
+{{ partial "hero.html" (dict "Content" .Content "image" "/photos/author.jpeg" "alt" "Danielle Verlaine") }}
+
+
+ {{ partial "newsletter.html" . }}
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+(function() {
+  if (window._newsletterScriptLoaded) return;
+  window._newsletterScriptLoaded = true;
+
+  let widgetId = null;
+  let turnstileReady = false;
+
+  function renderWidgetAndAttachForm() {
+    const form = document.querySelector('.newsletter-form');
+    const emailInput = form.querySelector('.newsletter-email');
+    const message = document.getElementById('form-message');
+    const widgetDiv = form.querySelector('.cf-turnstile');
+
+    // Defensive: Remove any existing widget children to prevent zombie hydras
+    while (widgetDiv.firstChild) widgetDiv.removeChild(widgetDiv.firstChild);
+
+    // Render only ONCE
+    if (!widgetDiv._turnstileRendered) {
+      widgetId = window.turnstile.render(widgetDiv, {
+        sitekey: widgetDiv.dataset.sitekey,
+        invisible: true
+      });
+      turnstileReady = true;
+      widgetDiv._turnstileRendered = true;
+    }
+
+    // Attach ONE submit handler
+    if (!form._handlerAttached) {
+      form._handlerAttached = true;
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+        if (!email) {
+          message.textContent = "Please enter a valid email.";
+          return;
+        }
+        if (!turnstileReady || !widgetId) {
+          message.textContent = "CAPTCHA still loading. Please wait and try again.";
+          return;
+        }
+
+        form.querySelector('button[type="submit"]').disabled = true;
+
+        window.turnstile.execute(widgetId, {
+          async callback(token) {
+            message.textContent = "Subscribing...";
+            try {
+              const response = await fetch('https://round-river-2f62.danielleverlaine90.workers.dev/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, token }),
+              });
+              const data = await response.json();
+
+              if (response.ok) {
+                message.textContent = data.message || "Thanks for subscribing!";
+                emailInput.value = '';
+              } else {
+                message.textContent = data.error || "Something went wrong, try again.";
+              }
+            } catch (err) {
+              message.textContent = err?.message || "Network error, please try again.";
+            }
+            form.querySelector('button[type="submit"]').disabled = false;
+            window.turnstile.reset(widgetId);
+          },
+          errorCallback() {
+            message.textContent = "CAPTCHA failed, try again!";
+            form.querySelector('button[type="submit"]').disabled = false;
+            window.turnstile.reset(widgetId);
+          }
+        });
+      });
+    }
+  }
+
+  function waitForTurnstile(tries = 0) {
+    if (window.turnstile && typeof window.turnstile.render === 'function') {
+      renderWidgetAndAttachForm();
+    } else if (tries < 20) {
+      setTimeout(() => waitForTurnstile(tries + 1), 100);
+    } else {
+      const message = document.getElementById('form-message');
+      if (message) message.textContent = "CAPTCHA failed to load, refresh and try again.";
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', waitForTurnstile);
+})();
+</script>
+
+
+{{ end }}
