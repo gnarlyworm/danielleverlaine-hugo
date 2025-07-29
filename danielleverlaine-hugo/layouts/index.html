@@ -2,8 +2,7 @@
 
 {{ partial "hero.html" (dict "Content" .Content "image" "/photos/author.jpeg" "alt" "Danielle Verlaine") }}
 
-
- {{ partial "newsletter.html" . }}
+{{ partial "newsletter.html" . }}
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
@@ -11,32 +10,31 @@
   if (window._newsletterScriptLoaded) return;
   window._newsletterScriptLoaded = true;
 
+  let firstRun = true;
   let widgetId = null;
-  let turnstileReady = false;
 
-  function renderWidgetAndAttachForm() {
+  function initNewsletter() {
+    // Protect against double render
+    if (!firstRun) return;
+    firstRun = false;
+
     const form = document.querySelector('.newsletter-form');
+    if (!form) return;
     const emailInput = form.querySelector('.newsletter-email');
     const message = document.getElementById('form-message');
     const widgetDiv = form.querySelector('.cf-turnstile');
+    if (!widgetDiv) return;
 
-    // Defensive: Remove any existing widget children to prevent zombie hydras
+    // Kill stray widget children
     while (widgetDiv.firstChild) widgetDiv.removeChild(widgetDiv.firstChild);
 
-    // Render only ONCE
-    if (!widgetDiv._turnstileRendered) {
-      widgetId = window.turnstile.render(widgetDiv, {
-        sitekey: widgetDiv.dataset.sitekey,
-        invisible: true
-      });
-      turnstileReady = true;
-      widgetDiv._turnstileRendered = true;
-    }
+    widgetId = window.turnstile.render(widgetDiv, {
+      sitekey: widgetDiv.dataset.sitekey,
+      invisible: true
+    });
 
-    // Attach ONE submit handler
     if (!form._handlerAttached) {
       form._handlerAttached = true;
-
       form.addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -45,12 +43,13 @@
           message.textContent = "Please enter a valid email.";
           return;
         }
-        if (!turnstileReady || !widgetId) {
-          message.textContent = "CAPTCHA still loading. Please wait and try again.";
+        form.querySelector('button[type="submit"]').disabled = true;
+
+        if (!widgetId) {
+          message.textContent = "CAPTCHA not loaded yet, please wait and try again.";
+          form.querySelector('button[type="submit"]').disabled = false;
           return;
         }
-
-        form.querySelector('button[type="submit"]').disabled = true;
 
         window.turnstile.execute(widgetId, {
           async callback(token) {
@@ -73,7 +72,9 @@
               message.textContent = err?.message || "Network error, please try again.";
             }
             form.querySelector('button[type="submit"]').disabled = false;
-            window.turnstile.reset(widgetId);
+            if (!response.ok) {
+  window.turnstile.reset(widgetId);
+}
           },
           errorCallback() {
             message.textContent = "CAPTCHA failed, try again!";
@@ -85,9 +86,10 @@
     }
   }
 
+  // Wait for Turnstile to be ready, then run everything above
   function waitForTurnstile(tries = 0) {
     if (window.turnstile && typeof window.turnstile.render === 'function') {
-      renderWidgetAndAttachForm();
+      initNewsletter();
     } else if (tries < 20) {
       setTimeout(() => waitForTurnstile(tries + 1), 100);
     } else {
@@ -99,6 +101,5 @@
   window.addEventListener('DOMContentLoaded', waitForTurnstile);
 })();
 </script>
-
 
 {{ end }}
