@@ -1,7 +1,6 @@
 
 ---
 title: "Books"
-draft: true
 ---
 ## Crown of Vengeance
 

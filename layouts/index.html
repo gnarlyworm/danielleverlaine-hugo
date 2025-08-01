@@ -4,19 +4,19 @@
 
 {{ partial "newsletter.html" . }}
 
-<!-- Add ?render=explicit to ensure no implicit auto-render -->
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
 (function() {
   if (window._newsletterScriptLoaded) return;
   window._newsletterScriptLoaded = true;
 
+  let firstRun = true;
   let widgetId = null;
-  let rendered = false;
 
   function initNewsletter() {
-    if (rendered) return; // guard for multiple runs
-    rendered = true;
+    // Protect against double render
+    if (!firstRun) return;
+    firstRun = false;
 
     const form = document.querySelector('.newsletter-form');
     if (!form) return;
@@ -25,7 +25,7 @@
     const widgetDiv = form.querySelector('.cf-turnstile');
     if (!widgetDiv) return;
 
-    // Kill stray widget children (shouldn't exist with render=explicit, but just in case)
+    // Kill stray widget children
     while (widgetDiv.firstChild) widgetDiv.removeChild(widgetDiv.firstChild);
 
     widgetId = window.turnstile.render(widgetDiv, {
@@ -68,13 +68,13 @@
               } else {
                 message.textContent = data.error || "Something went wrong, try again.";
               }
-              form.querySelector('button[type="submit"]').disabled = false;
-              if (!response.ok) window.turnstile.reset(widgetId);
             } catch (err) {
               message.textContent = err?.message || "Network error, please try again.";
-              form.querySelector('button[type="submit"]').disabled = false;
-              window.turnstile.reset(widgetId);
             }
+            form.querySelector('button[type="submit"]').disabled = false;
+            if (!response.ok) {
+  window.turnstile.reset(widgetId);
+}
           },
           errorCallback() {
             message.textContent = "CAPTCHA failed, try again!";
@@ -86,17 +86,19 @@
     }
   }
 
-  // Only DOMContentLoaded, no turnstile.ready!
-  document.addEventListener('DOMContentLoaded', function() {
-    // Short delay to make sure Turnstile is loaded (paranoid mode)
-    setTimeout(function check() {
-      if (window.turnstile && typeof window.turnstile.render === 'function') {
-        initNewsletter();
-      } else {
-        setTimeout(check, 100);
-      }
-    }, 50);
-  });
+  // Wait for Turnstile to be ready, then run everything above
+  function waitForTurnstile(tries = 0) {
+    if (window.turnstile && typeof window.turnstile.render === 'function') {
+      initNewsletter();
+    } else if (tries < 20) {
+      setTimeout(() => waitForTurnstile(tries + 1), 100);
+    } else {
+      const message = document.getElementById('form-message');
+      if (message) message.textContent = "CAPTCHA failed to load, refresh and try again.";
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', waitForTurnstile);
 })();
 </script>
 
